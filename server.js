@@ -71,7 +71,12 @@ app.post('/recipes', jsonParser, (req, res) => {
   const item = Recipes.create(req.body.name, req.body.ingredients);
   res.status(201).json(item);
 });
-
+// retrieve id of item to be deleted then call Recipes.delete() to remove item
+app.delete('/recipes/:id', (req, res) => {
+  Recipes.delete(req.params.id);
+  console.log(`Deleted Recipe item \`${req.params.id}\``);
+  res.status(204).end();
+})
 
 app.get('/recipes', (req, res) => {
   res.json(Recipes.get());
